@@ -1,0 +1,28 @@
+<meta name="google-signin-client_id" content="/*google-app-client-id*/">
+
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+<script>
+function onLoad() {
+  gapi.load('auth2', function() {
+	gapi.auth2.init();
+  });
+}
+</script>
+
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<script>
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+	$.ajax({
+		type: 'POST',
+		url: url for sending data for insertion',
+		data: { name: profile.getName(), email: profile.getEmail(), process: 'gmlogin' },
+		success: function(axresponse) { 
+			location.reload();
+		}
+	});
+}
+</script>
+
