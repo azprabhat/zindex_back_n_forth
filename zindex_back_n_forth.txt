@@ -1,0 +1,117 @@
+$('.shapebubble').on('click','.ibbtn',function() {
+            var this_btn = $(this);
+            var index_highest = 0;
+            var index_lowest = 1;
+            var clickevent = $(this).attr('shape-index');
+            var shape_id = $('.shapebubble').attr('shape-id');
+            var current_index = $('.mnpic #'+shape_id+'').css("zIndex");
+            $('.mnpic .backshape').each(function(){
+                var index_current = $(this).css("zIndex");
+                if (index_current > index_highest) {
+                    index_highest = index_current;
+                }
+            });
+            if(clickevent == 'spbtof')
+            {
+                $('#'+shape_id+'').css('zIndex',index_highest);
+                $('.mnpic .backshape').each(function(){
+                    var sp_id = $(this).attr('id');
+                    if(sp_id != shape_id)
+                    {
+                        var sp_id_zindex = $('#'+sp_id+'').css('zIndex');
+                        --sp_id_zindex;
+                        if(sp_id_zindex == 0)
+                        {
+                            sp_id_zindex = 1;
+                        }
+                        $(this).css("zIndex", sp_id_zindex);
+                    }
+                });
+                checkShapeZindex(shape_id);
+            }
+            if(clickevent == 'spstob')
+            {
+                $('#'+shape_id+'').css('zIndex', index_lowest);
+                $('.mnpic .backshape').each(function(){
+                    var sp_id = $(this).attr('id');
+                    if(sp_id != shape_id)
+                    {
+                        var sp_id_zindex = $('#'+sp_id+'').css('zIndex');
+                        ++sp_id_zindex;
+                        if(sp_id_zindex == index_highest)
+                        {
+                            sp_id_zindex = index_highest;
+                        }
+                        $(this).css("zIndex", sp_id_zindex);
+                    }
+                });
+                checkShapeZindex(shape_id);
+            }
+            if(clickevent == 'spbrngfrwrd')
+            {  
+                var crnt_index = +current_index + +1;
+                $('#'+shape_id+'').css('zIndex', crnt_index);
+                $('.mnpic .backshape').each(function(){
+                    var sp_id = $(this).attr('id');
+                    var sp_id_zindex = $('#'+sp_id+'').css('zIndex');
+                    if(sp_id != shape_id)
+                    {
+                        if(crnt_index == sp_id_zindex)
+                        {
+                            $(this).css("zIndex", --sp_id_zindex);
+                        }
+                    }
+                });
+                checkShapeZindex(shape_id);
+            }
+            if(clickevent == 'spsndback')
+            {   
+                var crnt_index = current_index - 1;
+                $('#'+shape_id+'').css('zIndex', crnt_index);
+                $('.mnpic .backshape').each(function(){
+                    var sp_id = $(this).attr('id');
+                    var sp_id_zindex = $('#'+sp_id+'').css('zIndex');
+                    if(sp_id != shape_id)
+                    {
+                        if(crnt_index == sp_id_zindex)
+                        {
+                            $(this).css("zIndex", ++sp_id_zindex);
+                        }
+                    }
+                });
+                checkShapeZindex(shape_id);
+            }
+        });
+        function checkShapeZindex(pid)
+        {
+            var index_highest = 0;
+            var index_lowest = 1;
+            $('.mnpic .backshape').each(function(){
+                var index_current = $(this).css("zIndex");
+                if (index_current > index_highest) {
+                    index_highest = index_current;
+                }
+            });
+            var sp_id_zindex = $('#'+pid+'').css('zIndex');            
+            if(sp_id_zindex == index_highest)
+            {
+                $('.shapebubble #spbtof').addClass('notworking').attr('shape-index', '');
+                $('.shapebubble #spbrngfrwrd').addClass('notworking').attr('shape-index', '');
+            }
+            else
+            {
+                $('.shapebubble #spbtof').removeClass('notworking').attr('shape-index','spbtof');
+                $('.shapebubble #spbrngfrwrd').removeClass('notworking').attr('shape-index','spbrngfrwrd');
+            }
+            
+            if(sp_id_zindex <= index_lowest)
+            {
+                $('.shapebubble #spstob').addClass('notworking').attr('shape-index', '');
+                $('.shapebubble #spsndback').addClass('notworking').attr('shape-index', '');
+            }
+            else
+            {
+                $('.shapebubble #spstob').removeClass('notworking').attr('shape-index', 'spstob');
+                $('.shapebubble #spsndback').removeClass('notworking').attr('shape-index', 'spsndback');
+            }
+        }
