@@ -17,7 +17,7 @@ function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
 	$.ajax({
 		type: 'POST',
-		url: url for sending data for insertion',
+		url: 'url for sending data for insertion',
 		data: { name: profile.getName(), email: profile.getEmail(), process: 'gmlogin' },
 		success: function(axresponse) { 
 			location.reload();
