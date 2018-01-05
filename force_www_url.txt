@@ -1,0 +1,4 @@
+#www requests
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteCond %{HTTP_HOST} (.*)
+# RewriteRule  (.*) http://www.%1$1 [R=301,L]
