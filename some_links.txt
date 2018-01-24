@@ -3,3 +3,5 @@ https://codepen.io/tstoik/pen/gaawRR  /* clock */
 https://codepen.io/fredjens/pen/adqLNO?limit=all&page=4&q=radio+ /* three switch */
 
 https://codepen.io/jakealbaugh/pen/yedmRO /* star */
+
+https://codepen.io/hexagoncircle/pen/bEMWyj /* star rating with smiley */
