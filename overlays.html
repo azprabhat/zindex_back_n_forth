@@ -1,0 +1,38 @@
+<script>
+function isOverlap(classname)
+{
+    var zindexbox = [];
+    var One=$('#'+classname+'');
+    var Two = $('.collide');
+    var elem = $(this);
+    return zindexbox = Two.overlaps(One);
+}
+(function($){
+    $.fn.overlaps = function(obj) {
+        var currentbx = $(obj).attr('id');
+        var elems = [];
+        this.each(function() {
+            var bounds = $(this).offset();
+            bounds.right = bounds.left + $(this).outerWidth();
+            bounds.bottom = bounds.top + $(this).outerHeight();
+
+            var compare = $(obj).offset();
+            compare.right = compare.left + $(obj).outerWidth();
+            compare.bottom = compare.top + $(obj).outerHeight();
+
+            if (!(compare.right < bounds.left ||
+                  compare.left > bounds.right ||
+                  compare.bottom < bounds.top ||
+                  compare.top > bounds.bottom)
+               ) {
+                var targetbx = $(this).attr('id');
+                if(currentbx != targetbx)
+                {
+                    elems.push(targetbx);
+                }
+            }
+        });
+        return elems;
+    };
+}(jQuery));
+</script>
